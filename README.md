@@ -1,4 +1,5 @@
-# Node and PostgreSQL Boilerplate app
+# Node and PostgreSQL Boilerplate
+
 ## How to set it up
 1. Clone this repository to your local machine
 2. Install the dependencies for the project:
