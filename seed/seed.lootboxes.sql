@@ -1,6 +1,6 @@
-TRUNCATE lootboxes RESTART IDENTITY CASCADE;
+TRUNCATE flights RESTART IDENTITY CASCADE;
 
-INSERT INTO lootboxes (title, description, box_owner)
+INSERT INTO flights (title, description, box_owner)
 VALUES 
 ('Shojo Classics', 'Soft titles with a romantic plotline, beautiful characters, and a dramatic climax', 1),
 ('Shojo Classics', 'Soft titles with a romantic plotline, beautiful characters, and a dramatic climax', 2),

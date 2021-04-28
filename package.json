@@ -12,16 +12,25 @@
     "deploy": "git push heroku master"
   },
   "keywords": [],
+  "engines": {
+    "node": "15.10.0"
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "helmet": "^4.0.0",
+    "heroku": "^7.2.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.2",
+    "logger": "^0.0.1",
     "morgan": "^1.9.1",
-    "pg": "^8.3.0",
+    "path": "^0.12.7",
+    "pg": "^8.5.0",
+    "winston": "^3.3.3",
     "xss": "^1.0.3"
   },
   "devDependencies": {
@@ -30,5 +39,16 @@
     "nodemon": "^2.0.4",
     "postgrator-cli": "^3.1.0",
     "supertest": "^3.3.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zkzerotwo/thinkful-node-postgres-boilerplate-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zkzerotwo/thinkful-node-postgres-boilerplate-app/issues"
+  },
+  "homepage": "https://github.com/zkzerotwo/thinkful-node-postgres-boilerplate-app#readme"
 }

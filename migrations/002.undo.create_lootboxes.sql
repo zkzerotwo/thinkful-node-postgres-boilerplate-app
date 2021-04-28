@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS lootboxes;
+DROP TABLE IF EXISTS flights;

@@ -1,3 +1,3 @@
-ALTER TABLE lootboxes
-DROP COLUMN IF EXISTS box_owner;
+ALTER TABLE flights
+DROP COLUMN IF EXISTS flight_owner;
 
