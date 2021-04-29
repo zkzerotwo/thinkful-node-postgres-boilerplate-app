@@ -7,5 +7,5 @@ CREATE TABLE pairs (
     servings INTEGER NOT NULL,
     beverage_title VARCHAR (255) NOT NULL, 
     beverage_description VARCHAR (255) NOT NULL, 
-    url VARCHAR (255) NOT NULL, 
+    url VARCHAR (255) NOT NULL
 );
