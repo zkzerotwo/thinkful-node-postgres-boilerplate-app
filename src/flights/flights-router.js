@@ -10,7 +10,9 @@ const jsonParser = express.json()
 const serializeFlight = flight => ({
     id: flight.id,
     title: xss(flight.title),
-    completed: flight.completed
+    description: xss(flight.description),
+    flight_owner: flight.flight_owner,
+    is_public: flight.is_public
 })
 
 flightRouter
@@ -32,11 +34,15 @@ flightRouter
         //take the input from the user
         const {
             title,
-            completed = false
+            flight_owner,
+            description,
+            is_public
         } = req.body
         const newFlight = {
             title,
-            completed
+            flight_owner,
+            description,
+            is_public
         }
 
         //validate the input
@@ -111,11 +117,15 @@ flightRouter
         //take the input from the user
         const {
             title,
-            completed
+            flight_owner,
+            description,
+            is_public
         } = req.body
         const flightToUpdate = {
             title,
-            completed
+            flight_owner,
+            description,
+            is_public
         }
 
         //validate the input by checking the length of the flightToUpdate object to make sure that we have all the values

@@ -53,12 +53,12 @@ const UsersService = {
             .where('id', id)
             .first()
     },
-    getLootboxesByUser(db, id) {
+    getFlightsByUser(db, id) {
         console.log(id)
         return db 
         .select('*')
-        .from('lootboxes')
-        .where('lootboxes.box_owner', id)
+        .from('flights')
+        .where('flights.flight_owner', id)
     }
 }
 

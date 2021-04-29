@@ -1,33 +1,33 @@
-const FlightService = {
+const PairsService = {
     //relevant
-    getFlights(db) {
+    getPairs(db) {
         return db
             .select('*')
-            .from('flight')
+            .from('pairs')
     },
-    getFlightById(db, flight_id) {
+    getPairById(db, pair_id) {
         return db
             .select('*')
-            .from('flight')
-            .where('flight.id', flight_id)
+            .from('pairs')
+            .where('pairs.id', pair_id)
             .first()
     },
     //relevant
-    insertFlight(db, newFlight) {
+    insertPair(db, newPair) {
         return db
-            .insert(newFlight)
-            .into('flight')
+            .insert(newPair)
+            .into('pairs')
             .returning('*')
             .then(rows => {
                 return rows[0]
             })
     },
     //relevant
-    updateFlight(db, flight_id, newFlight) {
-        return db('flight')
-            .update(newFlight, returning = true)
+    updatePair(db, pair_id, newPair) {
+        return db('pairs')
+            .update(newPair, returning = true)
             .where({
-                id: flight_id
+                id: pair_id
             })
             .returning('*')
             .then(rows => {
@@ -35,13 +35,13 @@ const FlightService = {
             })
     },
     //relevant
-    deleteFlight   (db, flight_id) {
-        return db('flight')
+    deletePair   (db, pair_id) {
+        return db('pairs')
             .delete()
             .where({
-                'id': flight_id
+                'id': pair_id
             })
     }
 }
 
-module.exports = FlightService
+module.exports = PairsService

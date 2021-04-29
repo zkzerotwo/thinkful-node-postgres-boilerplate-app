@@ -3,20 +3,20 @@ const FlightService = {
     getFlights(db) {
         return db
             .select('*')
-            .from('flight')
+            .from('flights')
     },
     getFlightById(db, flight_id) {
         return db
             .select('*')
-            .from('flight')
-            .where('flight.id', flight_id)
+            .from('flights')
+            .where('flights.id', flight_id)
             .first()
     },
     //relevant
     insertFlight(db, newFlight) {
         return db
             .insert(newFlight)
-            .into('flight')
+            .into('flights')
             .returning('*')
             .then(rows => {
                 return rows[0]
@@ -24,7 +24,7 @@ const FlightService = {
     },
     //relevant
     updateFlight(db, flight_id, newFlight) {
-        return db('flight')
+        return db('flights')
             .update(newFlight, returning = true)
             .where({
                 id: flight_id
@@ -36,7 +36,7 @@ const FlightService = {
     },
     //relevant
     deleteFlight   (db, flight_id) {
-        return db('flight')
+        return db('flights')
             .delete()
             .where({
                 'id': flight_id

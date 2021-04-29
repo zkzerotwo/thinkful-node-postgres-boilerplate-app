@@ -112,7 +112,7 @@ usersRouter
             .catch(next)
     })
 
-usersRouter.route('/:user_id/lootboxes')
+usersRouter.route('/:user_id/flights')
     .all((req, res, next) => {
         if (isNaN(parseInt(req.params.user_id))) {
             //if there is an error show it
@@ -145,11 +145,11 @@ usersRouter.route('/:user_id/lootboxes')
     //find lootboxex with this user id
     .get((req, res, next) => {
         // console.log(req.params)
-        UsersService.getLootboxesByUser(req.app.get('db'),
+        UsersService.getFlightsByUser(req.app.get('db'),
             req.params.user_id)
-            .then(lootboxes => {
+            .then(flights => {
                 //json each lootbox returned from the user
-                res.json({ lootboxes })
+                res.json({ flights })
             })
             .catch(next)
     })

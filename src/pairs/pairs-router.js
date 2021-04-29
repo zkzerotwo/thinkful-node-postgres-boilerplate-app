@@ -19,7 +19,7 @@ pairsRouter
     .get((req, res, next) => {
 
         //connect to the service to get the data
-        PairService.getPairs(req.app.get('db'))
+        PairsService.getPairs(req.app.get('db'))
             .then(pairs => {
                 //map the results to get each one of the objects and serialize them
                 res.json(pairs.map(serializePair))
