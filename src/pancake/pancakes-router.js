@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const PancakeService = require('./pancake-service')
+const PancakeService = require('./pancakes-service')
 
 const pancakeRouter = express.Router()
 const jsonParser = express.json()

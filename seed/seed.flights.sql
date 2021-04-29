@@ -1,6 +1,6 @@
 TRUNCATE flights RESTART IDENTITY CASCADE;
 
-INSERT INTO flights (id, flight_owner, title, description, is_public)
+INSERT INTO flights (flight_owner, title, description, is_public)
 VALUES 
 (2, 'Spicy', 'How food with even spicier wine', 0),
 (1, 'Tart and Crisp', 'Light and refreshing, tons of acid', 0),

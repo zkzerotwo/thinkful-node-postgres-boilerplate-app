@@ -9,7 +9,9 @@ const {
 const errorHandler = require('./middleware/error-handler')
 const usersRouter = require('./users/users-router')
 const authRouter = require("./auth/auth-router");
-const pancakeRouter = require('./pancake/pancake-router')
+const pancakeRouter = require('./pancake/pancakes-router');
+const flightsRouter = require("./flights/flights-router");
+const pairsRouter = require('./pairs/pairs-router');
 
 const app = express()
 
@@ -30,7 +32,10 @@ app.use('/api/pancakes', pancakeRouter)
 app.use("/api/auth", authRouter);
 //Load user registration router
 app.use("/api/users", usersRouter);
-//Load lootbox router
+//Load flight router
+app.use("/api/flights", flightsRouter);
+//Load flight router
+app.use("/api/pairs", pairsRouter);
 app.use(errorHandler)
 
 module.exports = app
