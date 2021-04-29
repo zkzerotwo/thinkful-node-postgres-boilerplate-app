@@ -12,6 +12,14 @@ const FlightService = {
             .where('flights.id', flight_id)
             .first()
     },
+    getPairsForFlight(db, flight_id) {
+        // console.log(flight_id)
+        return db
+        // .join('flights', 'flights.id', '=','pairs.flight_id')
+        .select('*')
+        .from('pairs')
+        .where(flight_id, flight_id)
+    },
     //relevant
     insertFlight(db, newFlight) {
         return db

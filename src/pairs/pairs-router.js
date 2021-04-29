@@ -9,8 +9,15 @@ const jsonParser = express.json()
 //filter out the response to avoid showing broken data
 const serializePair = pair => ({
     id: pair.id,
-    title: xss(pair.title),
-    completed: pair.completed
+    flight_id: pair.flight_id,
+    recipe_id: pair.recipe_id,
+    recipe_title: xss(pair.recipe_title),
+    recipe_image_url: xss(pair.recipe_image_url),
+    recipe_description: xss(pair.recipe_description),
+    servings: pair.servings,
+    beverage_title: xss(pair.beverage_title),
+    beverage_description: xss(pair.beverage_description),
+    url: xss(pair.url)
 })
 
 pairsRouter
@@ -31,12 +38,26 @@ pairsRouter
 
         //take the input from the user
         const {
-            title,
-            completed = false
+            flight_id,
+            recipe_id,
+            recipe_title,
+            recipe_image_url,
+            recipe_description,
+            servings,
+            beverage_title,
+            beverage_description,
+            url
         } = req.body
         const newPair = {
-            title,
-            completed
+            flight_id,
+            recipe_id,
+            recipe_title,
+            recipe_image_url,
+            recipe_description,
+            servings,
+            beverage_title,
+            beverage_description,
+            url
         }
 
         //validate the input
@@ -53,12 +74,12 @@ pairsRouter
 
         //save the input in the db
         PairsService.insertPair(
-                req.app.get('db'),
-                newPair
-            )
+            req.app.get('db'),
+            newPair
+        )
             .then(pair => {
                 res
-                //display the 201 status code
+                    //display the 201 status code
                     .status(201)
                     //redirect the request to the original url adding the pair id for editing
                     .location(path.posix.join(req.originalUrl, `/${pair.id}`))
@@ -83,9 +104,9 @@ pairsRouter
 
         //connect to the service to get the data
         PairsService.getPairById(
-                req.app.get('db'),
-                req.params.pair_id
-            )
+            req.app.get('db'),
+            req.params.pair_id
+        )
             .then(pair => {
                 if (!pair) {
                     //if there is an error show it
@@ -110,12 +131,28 @@ pairsRouter
 
         //take the input from the user
         const {
-            title,
-            completed
+            id,
+            flight_id,
+            recipe_id,
+            recipe_title,
+            recipe_image_url,
+            recipe_description,
+            servings,
+            beverage_title,
+            beverage_description,
+            url
         } = req.body
         const pairToUpdate = {
-            title,
-            completed
+            id,
+            flight_id,
+            recipe_id,
+            recipe_title,
+            recipe_image_url,
+            recipe_description,
+            servings,
+            beverage_title,
+            beverage_description,
+            url
         }
 
         //validate the input by checking the length of the pairToUpdate object to make sure that we have all the values
@@ -131,10 +168,10 @@ pairsRouter
 
         //save the input in the db
         PairsService.updatePair(
-                req.app.get('db'),
-                req.params.pair_id,
-                pairToUpdate
-            )
+            req.app.get('db'),
+            req.params.pair_id,
+            pairToUpdate
+        )
             .then(updatedPair => {
 
                 //get each one of the objects from the results and serialize them
@@ -145,9 +182,9 @@ pairsRouter
     //relevant
     .delete((req, res, next) => {
         PairsService.deletePair(
-                req.app.get('db'),
-                req.params.pair_id
-            )
+            req.app.get('db'),
+            req.params.pair_id
+        )
             .then(numRowsAffected => {
 
                 //check how many rows are effected to figure out if the delete was successful
