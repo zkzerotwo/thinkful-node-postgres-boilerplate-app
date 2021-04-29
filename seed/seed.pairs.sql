@@ -1,6 +1,6 @@
-TRUNCATE drops RESTART IDENTITY CASCADE;
+TRUNCATE pairs RESTART IDENTITY CASCADE;
 
-INSERT INTO drops 
+INSERT INTO pairs 
 (mal_id, drop_type, drop_name, drop_description, lootbox_id, url, image_url)
 
 VALUES
