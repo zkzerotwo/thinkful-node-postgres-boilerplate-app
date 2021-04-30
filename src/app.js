@@ -20,7 +20,7 @@ const morganOption = (NODE_ENV === 'production') ?
 app.use(morgan(morganOption, {
     skip: () => NODE_ENV === 'test',
 }))
-app.use(cors({origin: 'https://vinary-capstone-client.vercel.app/'}))
+app.use(cors({origin: 'https://vinary-capstone-client.vercel.app'}))
 app.use(helmet())
 
 app.use(express.static('public'))
