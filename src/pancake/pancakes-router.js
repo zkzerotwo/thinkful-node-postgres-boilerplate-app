@@ -1,10 +1,7 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const PancakeService = require('./pancake-service')
-const { KeyObject } = require('crypto')
-const { json } = require('express')
-const { post } = require('../app')
+const PancakeService = require('./pancakes-service')
 
 const pancakeRouter = express.Router()
 const jsonParser = express.json()
@@ -29,188 +26,6 @@ pancakeRouter
             })
             .catch(next)
     })
-
-    .get((req, res, next) => {
-        PancakeService.getPancakes(req.app.get('db'))
-            .then(pancakes => {
-                res.json(pancakes.map(serializePancake))
-            })
-            .catch(next)
-    })
-
-
-
-
-
-
-    .get((req, res, next) => {
-        pancakeRouter.getPancakes(req.app.get('db'))
-            .then(pancake => {
-                res.json(pancake.map(serializePancake))
-            })
-            .catch(next)
-    })
-
-    .post(jsonParser, (req, res, next) => {
-        const { title, completed = false } = req.body
-        const newPancake = { title, completed }
-        for (const [key, value] of Object.entries(newPancake)) {
-            if (value == null) {
-                return res.status(400).json({
-                    err: { msg: 'Sorry, you missed a field. Try again.' }
-                })
-            }
-        }
-        pancakeRouter.insertPancake(req.app.get('db'), newPancake)
-            .then(res
-                .status(204)
-                .location(path.posix.join(req.originalUrl, `${pancake.id}`))
-                .json(serializePancake))
-            .catch(next)
-    })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    .get((req, res, next) => {
-        PancakeService.getPancakes(req.app('db'))
-            .then(pancakes => {
-                res.json(pancakes.map(serializePancake))
-            })
-            .catch(next)
-    })
-    .delete(jsonParser, (req, res, next) => {
-        PancakeService.deletePancake(req.app('db'),
-            req.params.pancake_id)
-            .then(numRowsAffected => {
-                res.status(204).json(numRowsAffected)
-
-            })
-    })
-    .patch(jsonParser, (req, res, next) => {
-        const { title, completed = false } = req.body
-        const newPancake = { title, completed }
-        const numVal = Object.entries(newPancake).filter(Boolean).length
-        if (numVal == 0) {
-            return res.status(400).json({
-                error: {
-                    msg: "Oopsie"
-                }
-            })
-        }
-        PancakeService.updatePancake(req.app('db'),
-            req.params.pancake_id, newPancake)
-            .then(pancake => {
-                res.status(204).json(serializePancake(pancake))
-            })
-    })
-    .post(jsonParser, (req, res, next) => {
-        const { title, completed = false } = req.body
-        const postPancake = { title, completed }
-        for (const [key, value] of Object.entries(postPancake)) {
-            if (value == null) {
-                return res.status(400).json({
-                    error: {
-                        msg: "oops"
-                    }
-                })
-            }
-        }
-        PancakeService.postPancake(req.app('db'), postPancake)
-            .then(pancake => {
-                res.status(201)
-                    .location(path.posix.join(req.originalUrl + `${pancake.id}`))
-                    .json(serializePancake(pancake))
-                    .catch(next)
-            })
-    })
-
-
-.get((req, res, next) => {
-    PancakeService.getPancakes(req.app('db'))
-    .then(
-        res.status(200)
-        .json(serializePancake)
-    )
-    .catch(next)
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //relevant
     .post(jsonParser, (req, res, next) => {
 
@@ -238,12 +53,12 @@ pancakeRouter
 
         //save the input in the db
         PancakeService.insertPancake(
-            req.app.get('db'),
-            newPancake
-        )
+                req.app.get('db'),
+                newPancake
+            )
             .then(pancake => {
                 res
-                    //display the 201 status code
+                //display the 201 status code
                     .status(201)
                     //redirect the request to the original url adding the pancake id for editing
                     .location(path.posix.join(req.originalUrl, `/${pancake.id}`))
@@ -268,9 +83,9 @@ pancakeRouter
 
         //connect to the service to get the data
         PancakeService.getPancakeById(
-            req.app.get('db'),
-            req.params.pancake_id
-        )
+                req.app.get('db'),
+                req.params.pancake_id
+            )
             .then(pancake => {
                 if (!pancake) {
                     //if there is an error show it
@@ -316,10 +131,10 @@ pancakeRouter
 
         //save the input in the db
         PancakeService.updatePancake(
-            req.app.get('db'),
-            req.params.pancake_id,
-            pancakeToUpdate
-        )
+                req.app.get('db'),
+                req.params.pancake_id,
+                pancakeToUpdate
+            )
             .then(updatedPancake => {
 
                 //get each one of the objects from the results and serialize them
@@ -330,22 +145,12 @@ pancakeRouter
     //relevant
     .delete((req, res, next) => {
         PancakeService.deletePancake(
-            req.app.get('db'),
-            req.params.pancake_id
-        )
+                req.app.get('db'),
+                req.params.pancake_id
+            )
             .then(numRowsAffected => {
 
                 //check how many rows are effected to figure out if the delete was successful
-                res.status(204).json(numRowsAffected).end()
-            })
-            .catch(next)
-    })
-
-    .delete((req, res, next) => {
-        PancakeService.deletePancake(
-            req.app.get('db'), req.params.pancake_id
-        )
-            .then(numRowsAffected => {
                 res.status(204).json(numRowsAffected).end()
             })
             .catch(next)

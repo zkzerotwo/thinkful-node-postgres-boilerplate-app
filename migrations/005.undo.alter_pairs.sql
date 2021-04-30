@@ -1,0 +1,2 @@
+ALTER TABLE pairs
+DROP COLUMN IF EXISTS flight_id;
