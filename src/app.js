@@ -3,9 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
-const {
-    NODE_ENV
-} = require('./config')
+const { NODE_ENV } = require('./config')
 const errorHandler = require('./middleware/error-handler')
 const usersRouter = require('./users/users-router')
 const authRouter = require("./auth/auth-router");
@@ -22,7 +20,7 @@ const morganOption = (NODE_ENV === 'production') ?
 app.use(morgan(morganOption, {
     skip: () => NODE_ENV === 'test',
 }))
-app.use(cors())
+app.use(cors({origin: 'https://vinary-capstone-client.vercel.app/'}))
 app.use(helmet())
 
 app.use(express.static('public'))
