@@ -35,14 +35,14 @@ flightRouter
         const {
             title,
             flight_owner,
-            description,
-            is_public
+            description
+            // is_public
         } = req.body
         const newFlight = {
             title,
             flight_owner,
-            description,
-            is_public
+            description
+            // is_public
         }
 
         //validate the input
